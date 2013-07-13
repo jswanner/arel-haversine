@@ -1,3 +1,4 @@
+require 'mysql2'
 require 'spec_helper'
 
 describe 'Haversine in MySQL', :mysql do

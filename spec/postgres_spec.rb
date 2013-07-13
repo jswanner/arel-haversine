@@ -1,3 +1,4 @@
+require 'pg'
 require 'spec_helper'
 
 describe 'Haversine in PostgreSQL', :postgres do
