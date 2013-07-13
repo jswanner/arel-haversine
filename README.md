@@ -1,6 +1,6 @@
 # Arel::Haversine
 
-TODO: Write a gem description
+Provides haversine formula, implemented with Arel.
 
 ## Installation
 
@@ -18,7 +18,22 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+``` ruby
+require 'arel/haversine'
+
+class Location < ActiveRecord::Base
+  def self.in_order_of_proximity_to(latitude, longitude)
+    order(
+      Arel::Nodes::Haversine.new(
+        arel_table[:latitude],
+        arel_table[:longitude],
+        latitude,
+        longitude
+      )
+    )
+  end
+end
+```
 
 ## Contributing
 
