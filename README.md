@@ -1,4 +1,4 @@
-# Arel::Haversine
+# Arel::Haversine [![Build Status](https://secure.travis-ci.org/jswanner/arel-haversine.png?branch=master)](https://travis-ci.org/jswanner/arel-haversine)
 
 Provides haversine formula, implemented with Arel.
 
