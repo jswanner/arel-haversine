@@ -1,6 +1,6 @@
 shared_examples 'distance calculations' do
   let(:google) { [37.422045, -122.084347] }
-  let(:haversine) { Arel::Nodes::Haversine.new(*google, *san_francisco, unit: unit) }
+  let(:haversine) { Arel::Haversine.new(*google, *san_francisco, unit: unit) }
   let(:query) { project(haversine.as('distance')).to_sql }
   let(:result) { parse_results(execute(query)) }
   let(:san_francisco) { [37.77493, -122.419416] }

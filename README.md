@@ -24,7 +24,7 @@ require 'arel/haversine'
 class Location < ActiveRecord::Base
   def self.in_order_of_proximity_to(latitude, longitude)
     order(
-      Arel::Nodes::Haversine.new(
+      Arel::Haversine.new(
         arel_table[:latitude],
         arel_table[:longitude],
         latitude,
