@@ -1,8 +1,8 @@
 module Arel
   module Nodes
-    class Haversine < Unary
+    class Haversine < Function
       def initialize lat1, lng1, lat2, lng2, options = nil
-        @expr = Multiplication.new(
+        super Multiplication.new(
           Arcsine.new(
             Sqrt.new(
               Addition.new(
@@ -80,7 +80,9 @@ module Arel
       private
 
       def visit_Arel_Nodes_Haversine o
-        visit o.expr
+        visit(o.expressions).tap do |sql|
+          sql << " AS #{o.alias}" if o.alias
+        end
       end
     end
   end
