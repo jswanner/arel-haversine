@@ -8,13 +8,10 @@ module Arel
           Arcsine.new(
             SquareRoot.new(
               Addition.new(
-                Pow.new(Sine.new(Division.new(Radians.new(lat1 - lat2), 2)), 2),
+                sine_squared_half_difference_of_points(lat1, lat2),
                 Multiplication.new(
-                  Pow.new(Sine.new(Division.new(Radians.new(lng1 - lng2), 2)), 2),
-                  Multiplication.new(
-                    Cosine.new(Radians.new(lat2)),
-                    Cosine.new(Radians.new(lat1))
-                  )
+                  sine_squared_half_difference_of_points(lng1, lng2),
+                  Multiplication.new(cosine_of_point(lat1), cosine_of_point(lat2))
                 )
               )
             )
@@ -24,8 +21,16 @@ module Arel
 
       private
 
+      def cosine_of_point point
+        Cosine.new(Radians.new(point))
+      end
+
       def diameter options
         (options || {})[:unit] == :mi ? 7917.5 : 12742
+      end
+
+      def sine_squared_half_difference_of_points point1, point2
+        Pow.new(Sine.new(Division.new(Radians.new(point1 - point2), 2)), 2)
       end
     end
   end
